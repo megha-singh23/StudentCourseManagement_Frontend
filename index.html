@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" />
+  <link rel="icon" type="image/x-icon" href="logo1.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="/dist/styles.css" rel="stylesheet">
+  <title>EduTrack - Student Course Management</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            primary: '#2c3e50',
+            secondary: '#3498db',
+            accent: '#f8f9fa',
+          },
+        },
+      },
+    }
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>
