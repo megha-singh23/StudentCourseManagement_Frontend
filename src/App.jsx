@@ -61,21 +61,37 @@ function App() {
         gender: '',
         courseIds: []
     });
+    
     const [loginForm, setLoginForm] = useState({
         email: '',
         password: '',
     });
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
 
-        setFormData((prev) => ({
-            ...prev,
-            [name]: name === "courseIds"
-                ? value.split(',').map(v => v.trim()).filter(Boolean)
-                : value
-        }));
-    };
+  if (name === "courseIds") {
+    const ids = value
+      .split(",")
+      .map(id => id.trim())
+      .filter(id => id !== "")
+      .map(Number);
+
+    setFormData((prev) => ({
+      ...prev,
+      courseIds: ids
+    }));
+
+    console.log("Updated courseIds:", ids); // 🔥 debug log
+  } else {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  }
+};
+
+
 
     useEffect(() => {
         const savedStudent = JSON.parse(localStorage.getItem("student"));
@@ -108,6 +124,7 @@ function App() {
 
             const result = await response.json();
             console.log("User registered:", result);
+            console.log("Submitting formData:", formData); 
 
             setIsRegisterOpen(false);
         } catch (error) {
@@ -378,14 +395,14 @@ function App() {
                                     </div>
                                 </div>
                                 <div>
-                                    <label htmlFor="courses" className="block text-sm font-medium text-gray-700 mb-1">
+                                    <label htmlFor="courseIds" className="block text-sm font-medium text-gray-700 mb-1">
                                         CourseIds
                                     </label>
                                     <input
                                         type="text"
-                                        id="courses"
+                                        id="courseIds"
                                         name="courseIds"
-                                        value={Array.isArray(formData.courseIds) ? formData.courseIds.join(',') : ''}
+                                        value={formData.courseIds.join(",")}
                                         onChange={handleInputChange}
                                         className="w-full px-4 py-2 border rounded-md focus:ring-primary focus:border-primary"
                                         placeholder="Enter Course IDs (e.g., 1,2,3)"
@@ -522,14 +539,14 @@ function App() {
                                     </div>
                                 </div>
                                 <div>
-                                    <label htmlFor="courses" className="block text-sm font-medium text-gray-700 mb-1">
+                                    <label htmlFor="courseIds" className="block text-sm font-medium text-gray-700 mb-1">
                                         Select Courses
                                     </label>
                                     <input
                                         type="text"
-                                        id="courses"
-                                        name="courses"
-                                        value={formData.courseIds}
+                                        id="courseIds"
+                                        name="courseIds"
+                                        value={formData.courseIds.join(",")}
                                         onChange={handleInputChange}
                                         className="w-full px-4 py-2 border rounded-md focus:ring-primary focus:border-primary"
                                     />

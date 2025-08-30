@@ -1,7 +1,6 @@
-import  { useState } from 'react'
-
 export default function Navbar({student, onLogout, setIsLoginOpen, setIsRegisterOpen}) {
     // const student= useState(JSON.parse(localStorage.getItem("student")));
+    
             return (
                 <nav className="bg-primary text-white px-8 py-4 flex justify-between items-center shadow-md">
                     <a href="#" className="text-2xl font-semibold">EduTrack</a>
